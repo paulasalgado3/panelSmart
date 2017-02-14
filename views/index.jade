@@ -1,6 +1,9 @@
 html
   head
     script(src='json-to-table.js')
+    style.
+      .outletApagado{ background-image: url("imagenes/red.png"); width:20px;height:20px;background-size: 100% }
+      .outletPrendido{ background-image: url("imagenes/green.png");width:20px;height:20px;background-size: 100% }
   body
     script.
       function httpGetAsync(theUrl, callback){
@@ -12,8 +15,4 @@ html
       xmlHttp.open("GET", theUrl, true); // true for asynchronous
       xmlHttp.send(null);
       }
-      //var jsensores;
       httpGetAsync("https://10.105.231.63:8443/dispositivos", ConvertJsonToTable);
-      //console.log(jsensores);
-      //ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
-      //document.body.innerHTML = ConvertJsonToTable(sensores,'lista');

@@ -31,6 +31,25 @@ app.set('view engine', 'jade');
 //        this.clients[i].send(data);
 //    }
 //};
+//DISPOSITIVOS
+
+
+ var dispositivo1 = new Object();
+		dispositivo1.id = "1m2j3l4";
+		dispositivo1.tipo = "outlet";
+		dispositivo1.ubicacion = "comedor";
+		dispositivo1.estado = 0;
+		var dispositivo2 = new Object();
+		dispositivo2.id = "4rfj3l4";
+		dispositivo2.tipo = "outlet";
+		dispositivo2.ubicacion = "pieza1";
+		dispositivo2.estado = 1;
+		var dispositivos = new Array();
+		dispositivos.push(dispositivo1);
+		dispositivos.push(dispositivo2);
+
+////////////////
+
 
 app.get(/^(.+)$/, function(req, res){ 
     switch(req.params[0]) {
@@ -38,22 +57,8 @@ app.get(/^(.+)$/, function(req, res){
             res.render('index',{title:'Home'});
             break;
 	case '/dispositivos':
-	    var sensor1 = new Object();
-		sensor1.id = "1m2j3l4";
-		sensor1.tipo = "outlet";
-		sensor1.ubicacion = "comedor";
-		sensor1.estado = 0;
-		var sensor2 = new Object();
-		sensor2.id = "4rfj3l4";
-		sensor2.tipo = "outlet";
-		sensor2.ubicacion = "pieza1";
-		sensor2.estado = 0;
-		var sensores = new Array();
-		sensores.push(sensor1);
-		sensores.push(sensor2);
-		var jsensores = JSON.stringify(sensores);
-		console.log(jsensores);
-		res.send(jsensores);
+		var jdispositivos = JSON.stringify(dispositivos);
+		res.send(jdispositivos);
 	    break;
     default: res.sendFile( __dirname + req.params[0]); 
     }
@@ -62,10 +67,11 @@ app.get(/^(.+)$/, function(req, res){
 app.post(/^(.+)$/, function(req, res){ 
     switch(req.params[0]) {
         case '/dispositivos':
-            var nuevo = new Object();
-	    nuevo.id=req.body.id;
-	    nuevo.tipo=req.body.tipo;
-	    console.log(JSON.stringify(nuevo));
+            var dispositivonuevo = new Object();
+	    dispositivonuevo.id=req.body.id;
+	    dispositivonuevo.tipo=req.body.tipo;
+	    dispositivos.push(dispositivonuevo);
+	    res.end();
             break;
     default: res.sendFile( __dirname + req.params[0]); 
     }

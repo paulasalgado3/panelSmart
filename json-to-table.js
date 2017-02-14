@@ -88,7 +88,6 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
             if(typeof(parsedJson[0]) == 'object')
             {
                 headers = array_keys(parsedJson[0]);
-
                 for (i = 0; i < headers.length; i++)
                     thCon += thRow.format(headers[i]);
             }
@@ -100,7 +99,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
         {
             for (i = 0; i < parsedJson.length; i++)
             {
-                tbCon += tdRow.format(parsedJson[i]);
+		tbCon += tdRow.format(parsedJson[i]);
                 trCon += tr.format(tbCon);
                 tbCon = '';
             }
@@ -116,6 +115,8 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                 {
                     for (j = 0; j < headers.length; j++)
                     {
+                        switch(headers[j]){
+                            case "estado":
                         var value = parsedJson[i][headers[j]];
                         var isUrl = urlRegExp.test(value) || javascriptRegExp.test(value);
 
@@ -124,17 +125,43 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                         else
                         {
                             if(value){
-                            	if(typeof(value) == 'object'){
+                               tbCon += tdRow.format("<div class='outletPrendido'></div>");
+                            	/*if(typeof(value) == 'object'){
                             		//for supporting nested tables
                             		tbCon += tdRow.format(ConvertJsonToTable(eval(value.data), value.tableId, value.tableClassName, value.linkText));
                             	} else {
                             		tbCon += tdRow.format(value);
                             	}
+                                */
+                            } else {    // If value == null we format it like PhpMyAdmin NULL values
+                              //tbCon += tdRow.format(italic.format(value).toUpperCase());
+				tbCon += tdRow.format("<div class='outletApagado'></div>");
+				
+                            }
+                        }
+                        break;
+                        default:
+                        var value = parsedJson[i][headers[j]];
+                        var isUrl = urlRegExp.test(value) || javascriptRegExp.test(value);
+
+                        if(isUrl)   // If value is URL we auto-create a link
+                            tbCon += tdRow.format(link.format(value));
+                        else
+                        {
+                            if(value){
+                                if(typeof(value) == 'object'){
+                                    //for supporting nested tables
+                                    tbCon += tdRow.format(ConvertJsonToTable(eval(value.data), value.tableId, value.tableClassName, value.linkText));
+                                } else {
+                                    tbCon += tdRow.format(value);
+                                }
                                 
                             } else {    // If value == null we format it like PhpMyAdmin NULL values
                                 tbCon += tdRow.format(italic.format(value).toUpperCase());
+                
                             }
                         }
+                    }
                     }
                     trCon += tr.format(tbCon);
                     tbCon = '';
