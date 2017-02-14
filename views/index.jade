@@ -1,0 +1,19 @@
+html
+  head
+    script(src='json-to-table.js')
+  body
+    script.
+      function httpGetAsync(theUrl, callback){
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+      document.body.innerHTML = callback(JSON.parse(xmlHttp.responseText),'lista');
+      }
+      xmlHttp.open("GET", theUrl, true); // true for asynchronous
+      xmlHttp.send(null);
+      }
+      //var jsensores;
+      httpGetAsync("https://10.105.231.63:8443/dispositivos", ConvertJsonToTable);
+      //console.log(jsensores);
+      //ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
+      //document.body.innerHTML = ConvertJsonToTable(sensores,'lista');
