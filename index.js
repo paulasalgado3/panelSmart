@@ -14,6 +14,9 @@ var HTTPS_PORT = 8443;
 
 var httpsServer = https.createServer(serverConfig, app).listen(HTTPS_PORT);
 
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jade');
+
 //var wss = new WebSocketServer({server: httpsServer});
 
 //wss.on('connection', function(ws) {
@@ -30,8 +33,8 @@ var httpsServer = https.createServer(serverConfig, app).listen(HTTPS_PORT);
 
 app.get(/^(.+)$/, function(req, res){ 
     switch(req.params[0]) {
-        case '/prueba.html':
-            res.send("prueba ok");
+        case '/prueba':
+            res.render('index',{title:'Home'});
             break;
     default: res.sendFile( __dirname + req.params[0]); 
     }
