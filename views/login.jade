@@ -147,7 +147,7 @@ html
       .form button[type=submit]:focus {
       outline: none;
       }
-      .form input[type=submit] {
+      .form input[class=submit] {
       margin-top: 15px;
       width: 270px;
       text-align: center;
@@ -168,7 +168,7 @@ html
       -webkit-animation: shadowFadeOut 0.4s;
       -moz-animation: shadowFadeOut 0.4s;
       }
-      .form input[type=submit]:hover, input[type=submit]:focus {
+      .form input[class=submit]:hover, input[class=submit]:focus {
       color: #fff;
       box-shadow: inset 0px 46px 0px 0px #1abc9c;
       -webkit-animation: shadowFade 0.4s;
@@ -277,9 +277,10 @@ html
       error: function (result) {
       alert("error" );},
       success: function (data) {
-      
       if(data.message == "correcto"){
       window.location.href = '/panelDispositivos';
+      }else{
+      alert('Usuario o Password incorrecto');
       }
       }        });
       }
@@ -301,9 +302,5 @@ html
           input(type='password', name='password', placeholder='Password', required='')
           i.fa.fa-lock
         p.submit
-          input(name='sent', value='Login', onclick='validarUsuario(login.value,password.value)')
+          input.submit(name='sent', value='Login', onclick='validarUsuario(login.value,password.value)')
     // / Login
-    .copyright
-      p
-        | Copyright © 2014. Created by 
-        a(href='http://febbygunawan.com', target='_blank') Febby Gunawan
