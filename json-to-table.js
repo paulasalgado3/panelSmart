@@ -99,7 +99,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
         {
             for (i = 0; i < parsedJson.length; i++)
             {
-		tbCon += tdRow.format(parsedJson[i]);
+        tbCon += tdRow.format(parsedJson[i]);
                 trCon += tr.format(tbCon);
                 tbCon = '';
             }
@@ -126,18 +126,30 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                         {
                             if(value){
                                tbCon += tdRow.format("<div class='outletPrendido'></div>");
-                            	/*if(typeof(value) == 'object'){
-                            		//for supporting nested tables
-                            		tbCon += tdRow.format(ConvertJsonToTable(eval(value.data), value.tableId, value.tableClassName, value.linkText));
-                            	} else {
-                            		tbCon += tdRow.format(value);
-                            	}
+                                /*if(typeof(value) == 'object'){
+                                    //for supporting nested tables
+                                    tbCon += tdRow.format(ConvertJsonToTable(eval(value.data), value.tableId, value.tableClassName, value.linkText));
+                                } else {
+                                    tbCon += tdRow.format(value);
+                                }
                                 */
                             } else {    // If value == null we format it like PhpMyAdmin NULL values
                               //tbCon += tdRow.format(italic.format(value).toUpperCase());
-				tbCon += tdRow.format("<div class='outletApagado'></div>");
-				
+                tbCon += tdRow.format("<div class='outletApagado'></div>");
+                
                             }
+                        }
+                        break;
+                         case "editar":
+                        var value = parsedJson[i][headers[j]];
+                        var isUrl = urlRegExp.test(value) || javascriptRegExp.test(value);
+
+                        if(isUrl)   // If value is URL we auto-create a link
+                            tbCon += tdRow.format(link.format(value));
+                        else
+                        {
+                             tbCon += tdRow.format("<div class='editar'></div>");
+                           
                         }
                         break;
                         default:
