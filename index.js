@@ -19,21 +19,7 @@ app.use(cookieParser());
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade');
 
-//var wss = new WebSocketServer({server: httpsServer});
-
-//wss.on('connection', function(ws) {
-//    ws.on('message', function(message) {
-//        wss.broadcast(message);
-//    });
-//});
-
-//wss.broadcast = function(data) {
-//    for(var i in this.clients) {
-//        this.clients[i].send(data);
-//    }
-//};
 //DISPOSITIVOS
-
 
  var dispositivo1 = new Object();
 		dispositivo1.id = "1m2j3l4";
@@ -54,14 +40,13 @@ app.set('view engine', 'jade');
 var sesiones = new Array();
 var usuario = "admin";
 var password = "1234";
-var resultado = null ;
+var token ;
 function validarUsuario (u,p){
 	if(u==usuario && p==password){
-		//require('crypto').randomBytes(48, function(err, buffer) {
-  		//r=buffer.toString('hex');
-		resultado = Math.random().toString(36).substring(7);
-		//});
-	}else{resultado="incorrecto";}
+		token = Math.random().toString(36).substring(7);
+		sesiones.push(token);
+		//buscar la forma de borrar la sesion del array cuando expire
+	}else{token="incorrecto";}
 	
 
 }
@@ -74,7 +59,7 @@ app.get(/^(.+)$/, function(req, res){
 		res.render('login',{title:'Login'});
 		res.end();
 		break;
-        case '/prueba':
+        case '/panelDispositivos':
             res.render('index',{title:'Home'});
 		res.end();
             break;
@@ -97,9 +82,15 @@ app.post(/^(.+)$/, function(req, res){
 	    res.end();
             break;
 	 case '/validarUsuario':
+		token=null;
 		validarUsuario(req.body.nombre, req.body.password);
-		console.log( "login:"+ resultado);
-                if (resultado!="incorrecto"){res.cookie('id', resultado, { expires: new Date(Date.now() + 900000) } );};
+		console.log( "login: "+ token);
+                if (token!="incorrecto"){
+			res.cookie('token', token, { expires: new Date(Date.now() + 900000) } );
+		res.send({ message: 'correcto' });
+		}else{
+		res.send({message:'incorrecto'});
+		}
                 res.end();
                 break;
 

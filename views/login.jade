@@ -11,7 +11,7 @@ html
       /*variables*/
       /*general style*/
       /*google font*/
-      @import "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700)";
+      @import "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700)";
       body {
       font: 13px/20px "Open Sans", Tahoma, Verdana, sans-serif;
       color: #a7a599;
@@ -274,21 +274,21 @@ html
       dataType: 'json',
       data: json,
       contentType: 'application/json; charset=utf-8',
-      success: function (data) {
-      document.body.innerHTML = 'Correcto';  },
       error: function (result) {
-      document.body.innerHTML = 'Error, intente nuevamente';}        });
+      alert("error" );},
+      success: function (data) {
+      
+      if(data.message == "correcto"){
+      window.location.href = '/panelDispositivos';
+      }
+      }        });
       }
       function validarUsuario(f_usuario, f_password){
-      console.log("prueba");
       var usuario = new Object();
       usuario.nombre = f_usuario;
       usuario.password = f_password;
       var jusuario = JSON.stringify(usuario);
       enviarPOST("https://10.105.231.63:8443/validarUsuario",jusuario);
-      }
-      function validacion(cookie){
-      console.log(cookie);
       }
   body
     .login
