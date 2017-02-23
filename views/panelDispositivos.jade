@@ -39,12 +39,10 @@ html
       var token = new Object();
       token.id = f_token;
       var jtoken = JSON.stringify(token);
-      alert(jtoken);
       enviarPOST("https://10.105.231.63:8443/validarToken",jtoken);
       }
       function alInicio(){
       var token = (document.cookie.match(/^(?:.*;)?token=([^;]+)(?:.*)?$/)||[,null])[1];
-      alert(token);
       validarToken(token);
       }
   body(onload='alInicio();')
