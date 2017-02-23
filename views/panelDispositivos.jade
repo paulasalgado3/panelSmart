@@ -1,0 +1,61 @@
+html
+  head
+    script(src='json-to-table.js')
+    script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+    style.
+      .outletApagado{ background-image: url("imagenes/red.png"); width:20px;height:20px;background-size: 100% }
+      .outletPrendido{ background-image: url("imagenes/green.png");width:20px;height:20px;background-size: 100% }
+      .editar{ background-image: url("imagenes/edit.png");width:20px;height:20px;background-size: 100% }
+    script.
+      var xhr = new XMLHttpRequest();
+      function enviarPOST(url,json){        $.ajax({
+      url: url,
+      type: 'POST',
+      dataType: 'json',
+      data: json,
+      contentType: 'application/json; charset=utf-8',
+      error: function (result) {
+      alert("error" );},
+      success: function (data) {
+      if(data.message == "correcto"){
+      switch (data.accion){
+      case 'redirect':
+      window.location.href = data.destino;
+      break;
+      default:
+      }
+      }else{
+      switch (data.accion){
+      case 'redirect':
+      alert('Usuario o Password incorrecto');
+      break;
+      default:
+      window.location.href = '/';
+      }
+      }
+      }        });
+      }
+      function validarToken(f_token){
+      var token = new Object();
+      token.id = f_token;
+      var jtoken = JSON.stringify(token);
+      alert(jtoken);
+      enviarPOST("https://10.105.231.63:8443/validarToken",jtoken);
+      }
+      function alInicio(){
+      var token = (document.cookie.match(/^(?:.*;)?token=([^;]+)(?:.*)?$/)||[,null])[1];
+      alert(token);
+      validarToken(token);
+      }
+  body(onload='alInicio();')
+    script.
+      function httpGetAsync(theUrl, callback){
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+      document.body.innerHTML = callback(JSON.parse(xmlHttp.responseText),'lista');
+      }
+      xmlHttp.open("GET", theUrl, true); // true for asynchronous
+      xmlHttp.send(null);
+      }
+      httpGetAsync("https://10.105.231.63:8443/dispositivos", ConvertJsonToTable);

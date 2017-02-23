@@ -60,7 +60,7 @@ app.get(/^(.+)$/, function(req, res){
 		res.end();
 		break;
         case '/panelDispositivos':
-            res.render('index',{title:'Home'});
+            res.render('panelDispositivos',{title:'Panel Dispositivos'});
 		res.end();
             break;
 	case '/dispositivos':
@@ -87,9 +87,24 @@ app.post(/^(.+)$/, function(req, res){
 		console.log( "login: "+ token);
                 if (token!="incorrecto"){
 			res.cookie('token', token, { expires: new Date(Date.now() + 900000) } );
-		res.send({ message: 'correcto' });
+		res.send({ message: 'correcto', accion: 'redirect', destino:'/panelDispositivos' });
 		}else{
-		res.send({message:'incorrecto'});
+		res.send({message:'incorrecto', accion: 'redirect', destino:'/panelDispositivos'});
+		}
+                res.end();
+                break;
+	case '/validarToken':
+		var token_recibido = req.body.id;
+		var token_existente = false;
+		for (i = 0; i < sesiones.length; i++) {
+			if(sesiones[i]==token_recibido){
+				token_existente = true;
+			}
+		}
+		if(token_existente==true){
+			res.send({message:'correcto', accion: 'nada'});
+		}else{
+			res.send({message:'incorrecto', accion: 'nada'});
 		}
                 res.end();
                 break;

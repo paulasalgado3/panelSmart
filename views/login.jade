@@ -267,6 +267,8 @@ html
       }
     script(src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js')
     script.
+      var value_or_null = (document.cookie.match(/^(?:.*;)?token=([^;]+)(?:.*)?$/)||[,null])[1];
+      console.log(value_or_null);
       var xhr = new XMLHttpRequest();
       function enviarPOST(url,json){        $.ajax({
       url: url,
@@ -278,11 +280,28 @@ html
       alert("error" );},
       success: function (data) {
       if(data.message == "correcto"){
-      window.location.href = '/panelDispositivos';
+      switch (data.accion){
+      case 'redirect':
+      window.location.href = data.destino;
+      break;
+      default:
+      }
       }else{
+      switch (data.accion){
+      case 'redirect':
       alert('Usuario o Password incorrecto');
+      break;
+      default:
+      window.location.href = '/';
+      }
       }
       }        });
+      }
+      function validarToken(f_token){
+      var token = new Object();
+      token.id = f_token;
+      var jtoken = JSON.stringify(token);
+      enviarPOST("https://10.105.231.63:8443/validarToken",f_token);
       }
       function validarUsuario(f_usuario, f_password){
       var usuario = new Object();
