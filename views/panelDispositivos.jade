@@ -7,6 +7,7 @@ html
       .outletPrendido{ background-image: url("imagenes/green.png");width:20px;height:20px;background-size: 100% }
       .editar{ background-image: url("imagenes/edit.png");width:20px;height:20px;background-size: 100% }
     script.
+      window.addEventListener("click", validarToken);
       var xhr = new XMLHttpRequest();
       function enviarPOST(url,json){        $.ajax({
       url: url,
@@ -35,17 +36,15 @@ html
       }
       }        });
       }
-      function validarToken(f_token){
+      function validarToken(){
+      console.log('paso');
+      var id = (document.cookie.match(/^(?:.*;)?token=([^;]+)(?:.*)?$/)||[,null])[1];
       var token = new Object();
-      token.id = f_token;
+      token.id = id;
       var jtoken = JSON.stringify(token);
       enviarPOST("https://10.105.231.63:8443/validarToken",jtoken);
       }
-      function alInicio(){
-      var token = (document.cookie.match(/^(?:.*;)?token=([^;]+)(?:.*)?$/)||[,null])[1];
-      validarToken(token);
-      }
-  body(onload='alInicio();')
+  body(onload='validarToken();')
     script.
       function httpGetAsync(theUrl, callback){
       var xmlHttp = new XMLHttpRequest();

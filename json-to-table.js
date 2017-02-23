@@ -148,7 +148,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                             tbCon += tdRow.format(link.format(value));
                         else
                         {
-                             tbCon += tdRow.format("<div class='editar'></div>");
+                             tbCon += tdRow.format("<div class='editar' onclick='alert()'></div>");
                            
                         }
                         break;
