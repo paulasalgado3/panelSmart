@@ -89,7 +89,17 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
             {
                 headers = array_keys(parsedJson[0]);
                 for (i = 0; i < headers.length; i++)
-                    thCon += thRow.format(headers[i]);
+                    var columna = headers [i];
+                    switch (columna){
+                        //los casos que no se van a ver
+                        case 'tipo':
+                        break;
+                        case 'id':
+                        break;
+                        default:
+                        thCon += thRow.format(headers[i]);
+                    }
+                    
             }
         }
         th = th.format(tr.format(thCon));
@@ -113,10 +123,14 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                 
                 for (i = 0; i < parsedJson.length; i++)
                 {
+                    var tipo = "";
+                    var id = "";
                     for (j = 0; j < headers.length; j++)
                     {
+                        
                         switch(headers[j]){
                             case "estado":
+
                         var value = parsedJson[i][headers[j]];
                         var isUrl = urlRegExp.test(value) || javascriptRegExp.test(value);
 
@@ -124,20 +138,30 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                             tbCon += tdRow.format(link.format(value));
                         else
                         {
-                            if(value){
-                               tbCon += tdRow.format("<div class='outletPrendido'></div>");
-                                /*if(typeof(value) == 'object'){
+                            console.log(tipo);
+                            switch (tipo){
+                                
+                                case "outlet":
+                                console.log(tipo);
+                                if(value){
+                                    tbCon += tdRow.format("<div class='outletPrendido' onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 0 + '"' + ");'></div>");
+                   /*if(typeof(value) == 'object'){
                                     //for supporting nested tables
                                     tbCon += tdRow.format(ConvertJsonToTable(eval(value.data), value.tableId, value.tableClassName, value.linkText));
                                 } else {
                                     tbCon += tdRow.format(value);
                                 }
                                 */
-                            } else {    // If value == null we format it like PhpMyAdmin NULL values
+                                } else {    // If value == null we format it like PhpMyAdmin NULL values
                               //tbCon += tdRow.format(italic.format(value).toUpperCase());
-                tbCon += tdRow.format("<div class='outletApagado'></div>");
-                
+                                tbCon += tdRow.format("<div class='outletApagado' onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 1 + '"' + ");'></div>");                 
+                                }
+                                break;
+                                default:
                             }
+
+
+                            
                         }
                         break;
                          case "editar":
@@ -151,6 +175,13 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                              tbCon += tdRow.format("<div class='editar' onclick='alert()'></div>");
                            
                         }
+                        break;
+                        case "tipo":
+                        tipo = parsedJson[i][headers[j]];
+                        break;
+                        case "id":
+                            id = parsedJson[i][headers[j]];;
+                            console.log(id);
                         break;
                         default:
                         var value = parsedJson[i][headers[j]];

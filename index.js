@@ -1,6 +1,6 @@
 var fs = require('fs');
 var https = require('https');
-//var WebSocketServer = require('ws').Server;
+var WebSocketServer = require('ws').Server;
 var express = require("express");
 var bodyParser = require("body-parser");
 var cookieParser = require('cookie-parser')
@@ -11,13 +11,39 @@ var serverConfig = {
 
 var app = express();
 var HTTPS_PORT = 8443;
-
 var httpsServer = https.createServer(serverConfig, app).listen(HTTPS_PORT);
+var wss = new WebSocketServer({
+	server : httpsServer,
+});
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade');
+
+
+wss.on('connection', function(wss){
+	//enviar algo
+	wss.send('conectado');
+	wss.on('message', function incoming(message){
+		console.log(message);
+		switch (message){
+			case 'algo':
+			break;
+			default:
+
+		}
+	});
+
+});
+
+
+function enviarMensaje(mensaje){
+	wss.clients.forEach(function each(client){
+		client.send(mensaje);
+	});
+
+}
 
 //DISPOSITIVOS
 
@@ -25,12 +51,14 @@ app.set('view engine', 'jade');
 		dispositivo1.id = "1m2j3l4";
 		dispositivo1.tipo = "outlet";
 		dispositivo1.ubicacion = "comedor";
+		//apagado
 		dispositivo1.estado = 0;
 		dispositivo1.editar = "";
 		var dispositivo2 = new Object();
 		dispositivo2.id = "4rfj3l4";
 		dispositivo2.tipo = "outlet";
 		dispositivo2.ubicacion = "pieza1";
+		//prendido
 		dispositivo2.estado = 1;
 		dispositivo2.editar = "";
 		var dispositivos = new Array();
@@ -50,7 +78,6 @@ function validarUsuario (u,p){
 	
 
 }
-////////////////
 
 
 app.get(/^(.+)$/, function(req, res){ 
@@ -108,7 +135,13 @@ app.post(/^(.+)$/, function(req, res){
 		}
                 res.end();
                 break;
-
+	case '/cambiarEstado':
+		console.log(req.body);
+		var jrespuesta = ({'id': req.body.id, 'estado' : req.body.estado});
+		enviarMensaje(JSON.stringify(jrespuesta));
+		res.send({message:'correcto', accion: 'envio'});
+		res.end();
+		break;
     default: res.sendFile( __dirname + req.params[0]); 
     }
  });
