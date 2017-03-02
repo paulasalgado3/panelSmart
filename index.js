@@ -24,7 +24,7 @@ app.set('view engine', 'jade');
 
 wss.on('connection', function(wss){
 	//enviar algo
-	wss.send('conectado');
+	wss.send(JSON.stringify({tipo: '0', mensaje:'conectado'})); 
 	wss.on('message', function incoming(message){
 		console.log(message);
 		switch (message){
@@ -114,7 +114,7 @@ app.post(/^(.+)$/, function(req, res){
 		console.log( "login: "+ token);
                 if (token!="incorrecto"){
 			res.cookie('token', token, { expires: new Date(Date.now() + 900000) } );
-		res.send({ message: 'correcto', accion: 'redirect', destino:'/panelDispositivos' });
+		res.send({message: 'correcto', accion: 'redirect', destino:'/panelDispositivos' });
 		}else{
 		res.send({message:'incorrecto', accion: 'redirect', destino:'/panelDispositivos'});
 		}
@@ -137,7 +137,9 @@ app.post(/^(.+)$/, function(req, res){
                 break;
 	case '/cambiarEstado':
 		console.log(req.body);
-		var jrespuesta = ({'id': req.body.id, 'estado' : req.body.estado});
+		var mensaje = {'id':req.body.id, 'estado': req.body.estado};
+		var jmensaje = JSON.stringify(mensaje);
+		var jrespuesta = ({tipo: '1',mensaje:jmensaje});
 		enviarMensaje(JSON.stringify(jrespuesta));
 		res.send({message:'correcto', accion: 'envio'});
 		res.end();
