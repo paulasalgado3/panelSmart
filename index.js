@@ -26,9 +26,12 @@ wss.on('connection', function(wss){
 	//enviar algo
 	wss.send(JSON.stringify({tipo: '0', mensaje:'conectado'})); 
 	wss.on('message', function incoming(message){
-		console.log(message);
-		switch (message){
-			case 'algo':
+		switch ((JSON.parse(message)).tipo){
+			case 'registro':
+				var mensaje = JSON.parse(message);
+				var dispositivonuevo = mensaje.mensaje; 
+				dispositivos.push(dispositivonuevo);
+				
 			break;
 			default:
 
@@ -48,12 +51,6 @@ function enviarMensaje(mensaje){
 //DISPOSITIVOS
 
  var dispositivo1 = new Object();
-		dispositivo1.id = "1m2j3l4";
-		dispositivo1.tipo = "outlet";
-		dispositivo1.ubicacion = "comedor";
-		//apagado
-		dispositivo1.estado = 0;
-		dispositivo1.editar = "";
 		var dispositivo2 = new Object();
 		dispositivo2.id = "4rfj3l4";
 		dispositivo2.tipo = "outlet";
@@ -62,7 +59,6 @@ function enviarMensaje(mensaje){
 		dispositivo2.estado = 1;
 		dispositivo2.editar = "";
 		var dispositivos = new Array();
-		dispositivos.push(dispositivo1);
 		dispositivos.push(dispositivo2);
 
 var sesiones = new Array();
@@ -136,7 +132,7 @@ app.post(/^(.+)$/, function(req, res){
                 res.end();
                 break;
 	case '/cambiarEstado':
-		console.log(req.body);
+		//console.log(req.body);
 		var mensaje = {'id':req.body.id, 'estado': req.body.estado};
 		var jmensaje = JSON.stringify(mensaje);
 		var jrespuesta = ({tipo: '1',mensaje:jmensaje});
