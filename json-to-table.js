@@ -144,7 +144,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                                 case "outlet":
                                 console.log(tipo);
                                 if(value){
-                                    tbCon += tdRow.format("<div class='outletPrendido' onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 0 + '"' + ");'></div>");
+                                    tbCon += tdRow.format("<div class='outletPrendido' id="+id+" onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 1 + '"' + ");'></div>");
                    /*if(typeof(value) == 'object'){
                                     //for supporting nested tables
                                     tbCon += tdRow.format(ConvertJsonToTable(eval(value.data), value.tableId, value.tableClassName, value.linkText));
@@ -154,7 +154,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                                 */
                                 } else {    // If value == null we format it like PhpMyAdmin NULL values
                               //tbCon += tdRow.format(italic.format(value).toUpperCase());
-                                tbCon += tdRow.format("<div class='outletApagado' onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 1 + '"' + ");'></div>");                 
+                                tbCon += tdRow.format("<div class='outletApagado' id="+id+" onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 0+ '"' + ");'></div>");                 
                                 }
                                 break;
                                 default:

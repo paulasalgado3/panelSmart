@@ -26,12 +26,30 @@ wss.on('connection', function(wss){
 	//enviar algo
 	wss.send(JSON.stringify({tipo: '0', mensaje:'conectado'})); 
 	wss.on('message', function incoming(message){
+		 var mensaje = JSON.parse(message);
 		switch ((JSON.parse(message)).tipo){
 			case 'registro':
-				var mensaje = JSON.parse(message);
 				var dispositivonuevo = mensaje.mensaje; 
+				var yaexiste = false;
+				 for (i = 0; i < dispositivos.length; i++) {
+                                        if(dispositivos[i].id==mensaje.mensaje.id){
+						yaexiste = true;
+                		        }
+                		}
+				if(yaexiste == false){
 				dispositivos.push(dispositivonuevo);
+				}
 				
+			break;
+			case 'estado':
+				console.log(mensaje.mensaje.estado);
+				for (i = 0; i < dispositivos.length; i++) {
+		                        if(dispositivos[i].id==mensaje.mensaje.id){
+                                		dispositivos[i].estado = mensaje.mensaje.estado;
+						enviarMensaje(JSON.stringify({tipo:'3', mensaje:{id:mensaje.mensaje.id,estado:mensaje.mensaje.estado}}));
+                        }
+                }
+
 			break;
 			default:
 
