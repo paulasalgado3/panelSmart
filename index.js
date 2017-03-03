@@ -67,17 +67,21 @@ function enviarMensaje(mensaje){
 }
 
 //DISPOSITIVOS
-
- var dispositivo1 = new Object();
+		var dispositivo1 = new Object();
+		dispositivo1.id = "39e0ie";
+		dispositivo1.tipo = "outlet";
+		dispositivo1.estado = 0;
+		dispositivo1.ubicacion = "comedor";
 		var dispositivo2 = new Object();
 		dispositivo2.id = "4rfj3l4";
 		dispositivo2.tipo = "outlet";
+		dispositivo2.estado = 1;
 		dispositivo2.ubicacion = "pieza1";
 		//prendido
-		dispositivo2.estado = 1;
 		dispositivo2.editar = "";
 		var dispositivos = new Array();
 		dispositivos.push(dispositivo2);
+		dispositivos.push(dispositivo1);
 
 var sesiones = new Array();
 var usuario = "admin";

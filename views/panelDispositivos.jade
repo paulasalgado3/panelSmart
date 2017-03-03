@@ -2,10 +2,8 @@ html
   head
     script(src='json-to-table.js')
     script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-    style.
-      .outletApagado{ background-image: url("imagenes/outletApagado.png"); width:20px;height:38px;background-size: 100% }
-      .outletPrendido{ background-image: url("imagenes/outletPrendido.png");width:20px;height:38px;background-size: 100% }
-      .editar{ background-image: url("imagenes/edit.png");width:20px;height:20px;background-size: 100%
+    link(rel='stylesheet', href='/style/panelDispositivos.css')
+    
     script.
       window.addEventListener("click", validarToken);
       var xhr = new XMLHttpRequest();

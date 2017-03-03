@@ -61,14 +61,14 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
     var classMarkup = tableClassName ? ' class="' + tableClassName + '"' :
                                        '';
 
-    var tbl = '<table border="1" cellpadding="1" cellspacing="1"' + idMarkup + classMarkup + '>{0}{1}</table>';
+    var tbl = '<table border="1" cellpadding="1"  cellspacing="1"' + idMarkup + classMarkup + '>{0}{1}</table>';
 
     //Patterns for table content
     var th = '<thead>{0}</thead>';
     var tb = '<tbody>{0}</tbody>';
     var tr = '<tr>{0}</tr>';
     var thRow = '<th>{0}</th>';
-    var tdRow = '<td>{0}</td>';
+    var tdRow = '<td >{0}</td>';
     var thCon = '';
     var tbCon = '';
     var trCon = '';
@@ -87,10 +87,12 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
             // If JSON data is an object array, headers are automatically computed
             if(typeof(parsedJson[0]) == 'object')
             {
-                headers = array_keys(parsedJson[0]);
+		headers = array_keys(parsedJson[0]);
+		
                 for (i = 0; i < headers.length; i++)
-                    var columna = headers [i];
-                    switch (columna){
+                    
+		    
+                    switch (headers [i]){
                         //los casos que no se van a ver
                         case 'tipo':
                         break;
@@ -127,7 +129,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                     var id = "";
                     for (j = 0; j < headers.length; j++)
                     {
-                        
+                       
                         switch(headers[j]){
                             case "estado":
 
@@ -138,11 +140,11 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                             tbCon += tdRow.format(link.format(value));
                         else
                         {
-                            console.log(tipo);
+                            
                             switch (tipo){
                                 
                                 case "outlet":
-                                console.log(tipo);
+                                
                                 if(value){
                                     tbCon += tdRow.format("<div class='outletPrendido' id="+id+" onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 1 + '"' + ");'></div>");
                    /*if(typeof(value) == 'object'){
@@ -181,7 +183,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                         break;
                         case "id":
                             id = parsedJson[i][headers[j]];;
-                            console.log(id);
+                            
                         break;
                         default:
                         var value = parsedJson[i][headers[j]];
