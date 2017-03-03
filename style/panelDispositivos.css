@@ -2,15 +2,19 @@
 	background-image: url("/imagenes/outletApagado.png"); 
 	height:100%;
 	width:auto;
-	background-size: 100% 100%;
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+	background-position: center; 
 	}
 
 .outletPrendido{ 
 	background-image: url("/imagenes/outletPrendido.png");
 	height:100%;
 	width:auto;
-	background-size: 100% 100%;
-	
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+	background-position: center; 
+
 	}
 .editar{ 
 	background-image: url("/imagenes/edit.png");
@@ -57,19 +61,23 @@ table td{
 
 table{
 	width:100%;
-	height:30%;
+	height:35%;
 	//border:10px solid #454440;
 	border-collapse: collapse;
 	//border-radius:4px;
 	font-family: 'Open Sans', sans-serif;	
 	text-transform: uppercase;
 	font-weight: bold;
+	font-size : 25;
 	padding:10px;
-	border-spacing: 0px 10px;
+	border-spacing: 0px 15px;
     	border-collapse: separate;
+	text-align: center;
 	}
 table thead{
 	border:none;
+	font-size : 40;
+
 	}
 table thead tr {
 	background-color: #1abc9c;
