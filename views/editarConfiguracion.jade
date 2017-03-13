@@ -1,0 +1,20 @@
+html
+  body
+    link(rel='stylesheet', href='/style/panelDispositivos.css')
+    script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+    table
+      thead
+        tr
+        th Dispositivo: !{id} !{tipos}
+      tbody
+        tr
+          td Tipo de dispositivo
+        tr
+          td
+            select(id="tiposDispositivos", name="Tipos de Dispositivos")
+              each tipo in !{tipos}
+                option(value=tipo) tipo
+        tr
+          td Ubicación
+        tr
+          td Tipo de dispositivo

@@ -12,15 +12,18 @@ var serverConfig = {
 var app = express();
 var HTTPS_PORT = 8443;
 var httpsServer = https.createServer(serverConfig, app).listen(HTTPS_PORT);
-var wss = new WebSocketServer({
+
+ wss = new WebSocketServer({
 	server : httpsServer,
 });
+
+
+
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade');
-
 
 wss.on('connection', function(wss){
 	//enviar algo
@@ -104,7 +107,7 @@ app.get(/^(.+)$/, function(req, res){
 		res.render('login',{title:'Login'});
 		res.end();
 		break;
-        case '/panelDispositivos':
+        case '/_panelDispositivos':
             res.render('panelDispositivos',{title:'Panel Dispositivos'});
 		res.end();
             break;
@@ -113,7 +116,23 @@ app.get(/^(.+)$/, function(req, res){
 		res.send(jdispositivos);
 		res.end();
 	    break;
-    default: res.sendFile( __dirname + req.params[0]); 
+	case '/tiposDispositivos':
+		var tipos = new Array();
+		var tipo = "";
+		var existe = false;
+	        for (i = 0; i < dispositivos.length; i++) {
+			tipo = dispositivos[i].tipo;
+				existe=false;
+				for(j = 0; j < tipos.length; j++){
+					if(tipos[j] == tipo){existe=true}
+				}	
+                                if(existe==false){tipos.push(tipo)}
+                }
+		var jtipos = JSON.stringify(tipos);
+		res.send(jtipos);
+		res.end();
+		break;	
+    	default: res.sendFile( __dirname + req.params[0]); 
     }
  });
 
@@ -126,19 +145,19 @@ app.post(/^(.+)$/, function(req, res){
 	    dispositivos.push(dispositivonuevo);
 	    res.end();
             break;
-	 case '/validarUsuario':
+	 case '/f_validarUsuario':
 		token=null;
 		validarUsuario(req.body.nombre, req.body.password);
 		console.log( "login: "+ token);
                 if (token!="incorrecto"){
 			res.cookie('token', token, { expires: new Date(Date.now() + 900000) } );
-		res.send({message: 'correcto', accion: 'redirect', destino:'/panelDispositivos' });
+		res.send({message: 'correcto', accion: 'redirect', destino:'/_panelDispositivos' });
 		}else{
-		res.send({message:'incorrecto', accion: 'redirect', destino:'/panelDispositivos'});
+		res.send({message:'incorrecto', accion: 'redirect', destino:'/_panelDispositivos'});
 		}
                 res.end();
                 break;
-	case '/validarToken':
+	case '/f_validarToken':
 		var token_recibido = req.body.id;
 		var token_existente = false;
 		for (i = 0; i < sesiones.length; i++) {
@@ -153,8 +172,7 @@ app.post(/^(.+)$/, function(req, res){
 		}
                 res.end();
                 break;
-	case '/cambiarEstado':
-		//console.log(req.body);
+	case '/f_cambiarEstado':
 		var mensaje = {'id':req.body.id, 'estado': req.body.estado};
 		var jmensaje = JSON.stringify(mensaje);
 		var jrespuesta = ({tipo: '1',mensaje:jmensaje});
@@ -162,6 +180,24 @@ app.post(/^(.+)$/, function(req, res){
 		res.send({message:'correcto', accion: 'envio'});
 		res.end();
 		break;
+	case '/_editarConfiguracion':
+                var id = req.body.id;
+		var tipos = new Array();
+                var tipo = "";
+                var existe = false;
+                for (i = 0; i < dispositivos.length; i++) {
+                        tipo = dispositivos[i].tipo;
+                                existe=false;
+                                for(j = 0; j < tipos.length; j++){
+                                        if(tipos[j] == tipo){existe=true}
+                                }
+                                if(existe==false){tipos.push(tipo)}
+                }
+                var jtipos = JSON.stringify(tipos);
+                res.render('editarConfiguracion',{title: 'Editar Configuracion',id: id, tipos: tipos});
+                res.end();
+                break;
+
     default: res.sendFile( __dirname + req.params[0]); 
     }
  });

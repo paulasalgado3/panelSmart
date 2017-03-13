@@ -87,11 +87,11 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
             // If JSON data is an object array, headers are automatically computed
             if(typeof(parsedJson[0]) == 'object')
             {
-		headers = array_keys(parsedJson[0]);
-		
+        headers = array_keys(parsedJson[0]);
+        
                 for (i = 0; i < headers.length; i++)
                     
-		    
+            
                     switch (headers [i]){
                         //los casos que no se van a ver
                         case 'tipo':
@@ -174,7 +174,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                             tbCon += tdRow.format(link.format(value));
                         else
                         {
-                             tbCon += tdRow.format("<div class='editar' onclick='alert()'></div>");
+                              tbCon += tdRow.format("<div class='editar' onclick='editarConfiguracion(" + '"' + id + '"' + ");'></div>");
                            
                         }
                         break;

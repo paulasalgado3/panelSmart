@@ -301,14 +301,14 @@ html
       var token = new Object();
       token.id = f_token;
       var jtoken = JSON.stringify(token);
-      enviarPOST("https://200.5.235.62:8443/validarToken",f_token);
+      enviarPOST("https://200.5.235.62:8443/f_validarToken",f_token);
       }
       function validarUsuario(f_usuario, f_password){
       var usuario = new Object();
       usuario.nombre = f_usuario;
       usuario.password = f_password;
       var jusuario = JSON.stringify(usuario);
-      enviarPOST("https://200.5.235.62:8443/validarUsuario",jusuario);
+      enviarPOST("https://200.5.235.62:8443/f_validarUsuario",jusuario);
       }
   body
     .login
