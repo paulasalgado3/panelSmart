@@ -5,16 +5,22 @@ html
     table
       thead
         tr
-        th Dispositivo: !{id} !{tipos}
+        th Dispositivo: !{id}
       tbody
         tr
           td Tipo de dispositivo
         tr
           td
             select(id="tiposDispositivos", name="Tipos de Dispositivos")
-              each tipo in !{tipos}
-                option(value=tipo) tipo
+              each tipo in tipos
+                if (dispositivo.tipo == tipo)
+                  option(value=tipo selected="selected") #{tipo}
+                else
+                  option(value=tipo) #{tipo} 
         tr
-          td Ubicación
+          td Ubicacion
         tr
-          td Tipo de dispositivo
+          td 
+            input(type="text", name="ubicacion" value=dispositivo.ubicacion)
+
+        

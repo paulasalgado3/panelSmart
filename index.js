@@ -75,6 +75,7 @@ function enviarMensaje(mensaje){
 		dispositivo1.tipo = "outlet";
 		dispositivo1.estado = 0;
 		dispositivo1.ubicacion = "comedor";
+		dispositivo1.editar = "";
 		var dispositivo2 = new Object();
 		dispositivo2.id = "4rfj3l4";
 		dispositivo2.tipo = "outlet";
@@ -82,9 +83,15 @@ function enviarMensaje(mensaje){
 		dispositivo2.ubicacion = "pieza1";
 		//prendido
 		dispositivo2.editar = "";
+		var dispositivo3 = new Object();
+		dispositivo3.id = "k3k4k5o";
+		dispositivo3.tipo = "otro";
+		dispositivo3.estado = 0;
+		dispositivo3.editar = "";
 		var dispositivos = new Array();
 		dispositivos.push(dispositivo2);
 		dispositivos.push(dispositivo1);
+		dispositivos.push(dispositivo3);
 
 var sesiones = new Array();
 var usuario = "admin";
@@ -182,19 +189,21 @@ app.post(/^(.+)$/, function(req, res){
 		break;
 	case '/_editarConfiguracion':
                 var id = req.body.id;
+		var tipo = "";
 		var tipos = new Array();
-                var tipo = "";
+		var dispositivo = new Object();
                 var existe = false;
                 for (i = 0; i < dispositivos.length; i++) {
                         tipo = dispositivos[i].tipo;
                                 existe=false;
+				if(dispositivos[i].id == id){dispositivo = dispositivos[i]}
                                 for(j = 0; j < tipos.length; j++){
                                         if(tipos[j] == tipo){existe=true}
                                 }
                                 if(existe==false){tipos.push(tipo)}
                 }
-                var jtipos = JSON.stringify(tipos);
-                res.render('editarConfiguracion',{title: 'Editar Configuracion',id: id, tipos: tipos});
+		var jdispositivo = JSON.stringify(dispositivo);
+                res.render('editarConfiguracion',{title: 'Editar Configuracion',id: id, tipos: tipos, dispositivo: dispositivo});
                 res.end();
                 break;
 
