@@ -103,3 +103,11 @@ table td{
 	 
 	}
 
+select{
+	text-transform: uppercase;
+	font-size : 25;
+}
+input{
+	text-transform: uppercase;
+	font-size : 25;
+}
