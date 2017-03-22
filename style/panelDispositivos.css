@@ -18,9 +18,11 @@
 	}
 .editar{ 
 	background-image: url("/imagenes/edit.png");
-	width:20px;
-	height:20px;
-	background-size: 100% 
+        width: 100%;
+        height: 100%;
+        background-size: 80% 80%;
+        background-repeat: no-repeat;
+	background-position: center;
 	}
 body{
 	background-color:#31302b;
