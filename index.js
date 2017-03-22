@@ -106,7 +106,9 @@ function validarUsuario (u,p){
 	
 
 }
-
+// _ para paginas
+// f_ para meotodos
+// sin nada para respuestas rest
 
 app.get(/^(.+)$/, function(req, res){ 
     switch(req.params[0]) {
@@ -123,22 +125,25 @@ app.get(/^(.+)$/, function(req, res){
 		res.send(jdispositivos);
 		res.end();
 	    break;
-	case '/tiposDispositivos':
-		var tipos = new Array();
-		var tipo = "";
-		var existe = false;
-	        for (i = 0; i < dispositivos.length; i++) {
-			tipo = dispositivos[i].tipo;
-				existe=false;
-				for(j = 0; j < tipos.length; j++){
-					if(tipos[j] == tipo){existe=true}
-				}	
+	 case '/_editarConfiguracion':
+                var id = req.query.id;
+                var tipo = "";
+                var tipos = new Array();
+                var dispositivo = new Object();
+                var existe = false;
+                for (i = 0; i < dispositivos.length; i++) {
+                        tipo = dispositivos[i].tipo;
+                                existe=false;
+                                if(dispositivos[i].id == id){dispositivo = dispositivos[i]}
+                                for(j = 0; j < tipos.length; j++){
+                                        if(tipos[j] == tipo){existe=true}
+                                }
                                 if(existe==false){tipos.push(tipo)}
                 }
-		var jtipos = JSON.stringify(tipos);
-		res.send(jtipos);
-		res.end();
-		break;	
+                var jdispositivo = JSON.stringify(dispositivo);
+                res.render('editarConfiguracion',{title: 'Editar Configuracion',id: id, tipos: tipos, dispositivo: dispositivo});
+                res.end();
+                break;
     	default: res.sendFile( __dirname + req.params[0]); 
     }
  });
@@ -158,9 +163,9 @@ app.post(/^(.+)$/, function(req, res){
 		console.log( "login: "+ token);
                 if (token!="incorrecto"){
 			res.cookie('token', token, { expires: new Date(Date.now() + 900000) } );
-		res.send({message: 'correcto', accion: 'redirect', destino:'/_panelDispositivos' });
+			res.send({message: 'correcto', accion: 'redirect', destino:'/_panelDispositivos'});
 		}else{
-		res.send({message:'incorrecto', accion: 'redirect', destino:'/_panelDispositivos'});
+			res.send({message:'incorrecto', accion: 'redirect', destino:'/_panelDispositivos'});
 		}
                 res.end();
                 break;
@@ -187,30 +192,24 @@ app.post(/^(.+)$/, function(req, res){
 		res.send({message:'correcto', accion: 'envio'});
 		res.end();
 		break;
-	case '/_editarConfiguracion':
-                var id = req.body.id;
-		var tipo = "";
-		var tipos = new Array();
-		var dispositivo = new Object();
-                var existe = false;
-                for (i = 0; i < dispositivos.length; i++) {
-                        tipo = dispositivos[i].tipo;
-                                existe=false;
-				if(dispositivos[i].id == id){dispositivo = dispositivos[i]}
-                                for(j = 0; j < tipos.length; j++){
-                                        if(tipos[j] == tipo){existe=true}
-                                }
-                                if(existe==false){tipos.push(tipo)}
-                }
-		var jdispositivo = JSON.stringify(dispositivo);
-                res.render('editarConfiguracion',{title: 'Editar Configuracion',id: id, tipos: tipos, dispositivo: dispositivo});
-                res.end();
-                break;
-
     default: res.sendFile( __dirname + req.params[0]); 
     }
  });
 
-
+app.put(/^(.+)$/, function(req, res){
+    switch(req.params[0]) {
+        case '/dispositivos':
+            var dispositivonuevo = new Object();
+	    for (i = 0; i < dispositivos.length; i++) {
+		if(dispositivos[i].id == req.body.id){
+			dispositivos[i].tipo = req.body.tipo;
+			dispositivos[i].ubicacion = req.body.ubicacion;
+		}
+            }
+            res.end();
+            break;
+	default:
+	}
+});
 
 console.log('Servidor corriendo');

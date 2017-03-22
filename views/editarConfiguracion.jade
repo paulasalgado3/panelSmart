@@ -1,15 +1,19 @@
 html
-  body
+  head
     link(rel='stylesheet', href='/style/panelDispositivos.css')
+    script(src='metodos.js')
     script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+    script.
+      window.addEventListener("click", validarToken);
+  body(onload='validarToken();')
     table
       thead
         tr
-        th Dispositivo: !{id}
+          th(colspan='2') Dispositivo: !{dispositivo.id}
       tbody
         tr
           td Tipo de dispositivo
-        tr
+        
           td
             select(id="tiposDispositivos", name="Tipos de Dispositivos")
               each tipo in tipos
@@ -19,11 +23,11 @@ html
                   option(value=tipo) #{tipo} 
         tr
           td Ubicacion
-        tr
+        
           td 
-            input(type="text", name="ubicacion" value=dispositivo.ubicacion)
+            input(type="text", name="ubicacion", id="ubicacion", value=dispositivo.ubicacion)
         tr
-          td
-            button(onclick='') Aceptar 
-            button(onclick='') Cancelar
+          td(colspan='2')
+            button(onclick="modificarDispositivo('"+dispositivo.id+"');") Aceptar 
+            button(onclick="regresar('_panelDispositivos');") Cancelar
         
