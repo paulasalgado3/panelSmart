@@ -69,6 +69,8 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
     var tr = '<tr>{0}</tr>';
     var thRow = '<th>{0}</th>';
     var tdRow = '<td >{0}</td>';
+    var tdRowTipo = '<td class="tdtipo" >{0}</td>';
+    var tdRowEditar = '<td class="tdeditar" >{0}</td>';
     var thCon = '';
     var tbCon = '';
     var trCon = '';
@@ -145,21 +147,21 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                                 
                                 case "outlet":
                                 
-                                if(value){
-                                    tbCon += tdRow.format("<div class='outletPrendido' id="+id+" onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 1 + '"' + ");'></div>");
-                   /*if(typeof(value) == 'object'){
-                                    //for supporting nested tables
-                                    tbCon += tdRow.format(ConvertJsonToTable(eval(value.data), value.tableId, value.tableClassName, value.linkText));
-                                } else {
-                                    tbCon += tdRow.format(value);
-                                }
-                                */
-                                } else {    // If value == null we format it like PhpMyAdmin NULL values
-                              //tbCon += tdRow.format(italic.format(value).toUpperCase());
-                                tbCon += tdRow.format("<div class='outletApagado' id="+id+" onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 0+ '"' + ");'></div>");                 
-                                }
+                                	if(value){
+                                		tbCon += tdRowTipo.format("<div class='outletPrendido' id="+id+" onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 1 + '"' + ");'></div>");
+                   
+                                	} else {    // If value == null we format it like PhpMyAdmin NULL values
+                                		tbCon += tdRowTipo.format("<div class='outletApagado' id="+id+" onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 0+ '"' + ");'></div>");                 
+                                	}
                                 break;
                                 default:
+					if(value){
+                                		tbCon += tdRowTipo.format("<div class='otroPrendido' id="+id+" onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 1 + '"' + ");'></div>");
+                   
+                                	} else {    // If value == null we format it like PhpMyAdmin NULL values
+                                		tbCon += tdRowTipo.format("<div class='otroApagado' id="+id+" onclick='cambiarEstado(" + '"' + id + '"' + ", "+ '"'  + 0+ '"' + ");'></div>");                 
+                                }
+                                	 
                             }
 
 
@@ -174,7 +176,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                             tbCon += tdRow.format(link.format(value));
                         else
                         {
-                              tbCon += tdRow.format("<div class='editar' onclick='editarConfiguracion(" + '"' + id + '"' + ");'></div>");
+                              tbCon += tdRowEditar.format("<div class='editar' onclick='editarConfiguracion(" + '"' + id + '"' + ");'></div>");
                            
                         }
                         break;

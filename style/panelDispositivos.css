@@ -1,7 +1,7 @@
- .outletApagado{ 
+.outletApagado{ 
 	background-image: url("/imagenes/outletApagado.png"); 
-	height:100%;
-	width:auto;
+	height:20vw;
+	width: 20vw;
 	background-size: 80% 80%;
 	background-repeat: no-repeat;
 	background-position: center; 
@@ -9,17 +9,40 @@
 
 .outletPrendido{ 
 	background-image: url("/imagenes/outletPrendido.png");
-	height:100%;
-	width:auto;
+	height:20vw;
+	width: 20vw;
 	background-size: 80% 80%;
 	background-repeat: no-repeat;
 	background-position: center; 
-
 	}
+.otroPrendido{ 
+	background-image: url("/imagenes/otroPrendido.png");
+	height:20vw;
+	width: 20vw;
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+	background-position: center; 
+	}
+.otroApagado{ 
+	background-image: url("/imagenes/otroApagado.png");
+	height:20vw;
+	width: 20vw;
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+	background-position: center; 
+	}
+.tdtipo{
+	height:20vw;
+	width: 20vw;
+}
+.tdeditar{
+	height:20vw;
+	width: 20vw;
+}
 .editar{ 
 	background-image: url("/imagenes/edit.png");
-        width: 100%;
-        height: 100%;
+	height:20vw;
+	width: 20vw;
         background-size: 80% 80%;
         background-repeat: no-repeat;
 	background-position: center;
@@ -63,14 +86,13 @@ table td{
 
 table{
 	width:100%;
-	height:35%;
 	//border:10px solid #454440;
 	border-collapse: collapse;
 	//border-radius:4px;
 	font-family: 'Open Sans', sans-serif;	
 	text-transform: uppercase;
 	font-weight: bold;
-	font-size : 25;
+	font-size : 55;
 	padding:10px;
 	border-spacing: 0px 15px;
     	border-collapse: separate;
@@ -78,7 +100,7 @@ table{
 	}
 table thead{
 	border:none;
-	font-size : 40;
+	font-size : 45;
 
 	}
 table thead tr {
@@ -86,6 +108,9 @@ table thead tr {
 	color: #fff;
 	//border:3px solid #1abc9c;
 	border-style: none;
+}
+table tbody tr{
+	height:20vw;
 }
 
 table tbody  tr td:last-child {
@@ -115,27 +140,24 @@ input{
 }
 
 button{
-      margin-top: 15px;
-      width: 270px;
-      text-align: center;
-      font-size: 14px;
-      font-family: 'Open Sans',sans-serif;
-      font-weight: bold;
-      padding: 12px 0;
-      letter-spacing: 0;
-      box-shadow: inset 0px 0px 0px 0px #1abc9c;
-      color: #fff;
-      background-color: #16a085;
-      text-shadow: none;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      position: relative;
-      margin-bottom: 20px;
-      -webkit-animation: shadowFadeOut 0.4s;
-      -moz-animation: shadowFadeOut 0.4s;
-      padding-rigth:20px;
-      padding-left: 20px;
+    margin: 5vw 1vw 5vw 1vw;
+    width: 40vw;
+    text-align: center;
+    font-size: 65px;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: bold;
+    padding: 12px 0;
+    letter-spacing: 0;
+    box-shadow: inset 0px 0px 0px 0px #1abc9c;
+    color: #fff;
+    background-color: #16a085;
+    text-shadow: none;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 20px;
+    -webkit-animation: shadowFadeOut 0.4s;
 }
 button:hover {
       color: #fff;
@@ -423,3 +445,12 @@ button:hover {
       .copyright p a:hover, .copyright a a:hover {
       color: #f2672e;
       }
+
+select{
+	font-size: 55;
+}
+.ubicacion{
+	font-size: 55;
+	max-width: 45vw;
+	
+}

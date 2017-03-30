@@ -12,10 +12,9 @@ html
           th(colspan='2') Dispositivo: !{dispositivo.id}
       tbody
         tr
-          td Tipo de dispositivo
-        
+          td Tipo        
           td
-            select(id="tiposDispositivos", name="Tipos de Dispositivos")
+            select(id="tiposDispositivos", name="Tipos de Dispositivos", )
               each tipo in tipos
                 if (dispositivo.tipo == tipo)
                   option(value=tipo selected="selected") #{tipo}
@@ -25,7 +24,7 @@ html
           td Ubicacion
         
           td 
-            input(type="text", name="ubicacion", id="ubicacion", value=dispositivo.ubicacion)
+            input(type="text", name="ubicacion", id="ubicacion", class="ubicacion", value=dispositivo.ubicacion)
         tr
           td(colspan='2')
             button(onclick="modificarDispositivo('"+dispositivo.id+"');") Aceptar 
