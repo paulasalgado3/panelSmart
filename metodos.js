@@ -99,6 +99,24 @@ function regresar(path){
 function desplegarOpciones(){
 	var opciones = document.getElementById('opciones');
 	if(opciones.rows.length==0){
+		//subirConfiguracion
+		var tr = document.createElement('tr');
+		var td = document.createElement('td');
+		td.innerHTML = "Subir Configuracion";
+		td.className = "nombreOpciones";
+		var tdIcono = document.createElement('td');
+		var input = document.createElement('input');
+		input.type = "file";
+		input.id = "selectFiles";
+		input.style = "opacity:0;  z-index: 2; position:absolute; width: 15vw; height: 15vw";
+		var buttonIcono = document.createElement('button');
+		buttonIcono.className = "btnOpciones";
+		buttonIcono.className += " uploadBackup";
+		tdIcono.appendChild(input);
+		tdIcono.appendChild(buttonIcono);
+		tr.appendChild(td);
+		tr.appendChild(tdIcono);
+		opciones.appendChild(tr);
 		//descargarBackup
 		var tr = document.createElement('tr');
 		var td = document.createElement('td');
@@ -110,15 +128,15 @@ function desplegarOpciones(){
 		form.download = "SmartPanel"+d.getDate()+d.getMonth()+d.getFullYear()+"_"+d.getHours()+d.getMinutes()+".json";
 		form.href = "https://200.5.235.62:8443/dispositivos";
 		var buttonIcono = document.createElement('button');
-		buttonIcono.id="downloadBackup";
 		buttonIcono.className = "btnOpciones";
 		buttonIcono.className += " downloadBackup";
 		form.appendChild(buttonIcono);
-		//tdIcono.appendChild(divIcono);
 		tdIcono.appendChild(form);
 		tr.appendChild(td);
 		tr.appendChild(tdIcono);
 		opciones.appendChild(tr);
+		
+
 	}else{
 		while(opciones.rows.length > 0) {
  			 opciones.deleteRow(0);

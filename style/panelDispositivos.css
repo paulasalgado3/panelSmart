@@ -499,10 +499,11 @@ select{
 #opciones{
 	background-color:transparent;
 	margin-bottom:15px;
+	border-spacing: 0px 15px;
 }
 #opciones tr{
 	height: 15vw;
-	border-spacing: 0px 15px;
+	border-collapse:separate;
 	}
 #opciones td{
 	font-size:40;
@@ -528,3 +529,15 @@ form{
 	background-repeat: no-repeat;
 	margin-left:20px;
 }
+.uploadBackup{
+	height: 15vw;
+	width: 15vw;
+	border-radius: 50%;
+	background-color:#1b927a;
+	background-image: url("/imagenes/upload.png");
+	background-size: 50% 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-left:20px;
+}
+
