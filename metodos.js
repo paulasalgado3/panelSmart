@@ -96,3 +96,28 @@ function modificarDispositivo(id){
 function regresar(path){
 	window.location.href = path;
 }
+function desplegarOpciones(){
+	var opciones = document.getElementById('opciones');
+	if(opciones.rows.length==0){
+		//descargarBackup
+		var tr = document.createElement('tr');
+		var td = document.createElement('td');
+		td.innerHTML = "Descargar Configuracion";
+		var tdIcono = document.createElement('td');
+		var divIcono = document.createElement('div');
+		divIcono.id="downloadBackup";
+		divIcono.className = "downloadBackup";
+		//divIcono.onClick = function{
+			
+
+		//	};
+		tdIcono.appendChild(divIcono);
+		tr.appendChild(td);
+		tr.appendChild(tdIcono);
+		opciones.appendChild(tr);
+	}else{
+		while(opciones.rows.length > 0) {
+ 			 opciones.deleteRow(0);
+		}
+	}
+}

@@ -84,7 +84,7 @@ table td{
 */
 /*----------------*/
 
-table{
+#dispositivos {
 	width:100%;
 	//border:10px solid #454440;
 	border-collapse: collapse;
@@ -98,33 +98,33 @@ table{
     	border-collapse: separate;
 	text-align: center;
 	}
-table thead{
+#dispositivos thead{
 	border:none;
 	font-size : 45;
 
 	}
-table thead tr {
+#dispositivos thead tr {
 	background-color: #1abc9c;
 	color: #fff;
 	//border:3px solid #1abc9c;
 	border-style: none;
 }
-table tbody tr{
+#dispositivos tbody tr{
 	height:20vw;
 }
 
-table tbody  tr td:last-child {
+#dispositivos tbody  tr td:last-child {
     border-radius: 0 10px 10px 0;
 }
-table tbody tr td:first-child {
+#dispositivos tbody tr td:first-child {
     border-radius: 0 0 0 10px;
 }
 
-table th{
+#dispositivos  th{
 	border:none;
 	
 	}
-table td{
+#dispositivos td{
 	border:none;
 	background-color:white;
 	 
@@ -453,4 +453,41 @@ select{
 	font-size: 55;
 	max-width: 45vw;
 	
+}
+.menu{
+	height: 15vw;
+	width: 15vw;
+	border-radius: 50%;
+	background-color:#1b927a;
+	background-image: url("/imagenes/opciones.png");
+	background-size: 50% 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 1;
+	position: fixed;
+	bottom: 3vw;
+    	right: 3vw;
+}
+.opciones{
+	z-index: 1;
+	position: fixed;
+	bottom: 18vw;
+    	right: 3vw;
+}
+#opciones{
+	background-color:transparent;
+	font-size:40;
+}
+.downloadBackup{
+	height: 15vw;
+	width: 15vw;
+	border-radius: 50%;
+	background-color:#1b927a;
+	background-image: url("/imagenes/download.png");
+	background-size: 50% 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-bottom:10px;
+	margin-left:20px;
+
 }

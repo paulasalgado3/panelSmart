@@ -35,9 +35,12 @@ html
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-      document.body.innerHTML = callback(JSON.parse(xmlHttp.responseText),'lista');
+      document.body.innerHTML += callback(JSON.parse(xmlHttp.responseText),'dispositivos');
       }
       xmlHttp.open("GET", theUrl, true); // true for asynchronous
       xmlHttp.send(null);
       }
       httpGetAsyncLista("https://200.5.235.62:8443/dispositivos", ConvertJsonToTable);
+    .menu(onclick='desplegarOpciones()')
+    .opciones
+      table#opciones
