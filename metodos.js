@@ -71,8 +71,8 @@
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-      console.log("get:" + xmlHttp.responseText);
-      callback((xmlHttp.responseText));
+      	console.log("get:" + xmlHttp.responseText);
+      	callback(xmlHttp.responseText);
       }
       xmlHttp.open("GET", theUrl, true); // true for asynchronous
       xmlHttp.send(null);
@@ -103,15 +103,19 @@ function desplegarOpciones(){
 		var tr = document.createElement('tr');
 		var td = document.createElement('td');
 		td.innerHTML = "Descargar Configuracion";
+		td.className = "nombreOpciones";
 		var tdIcono = document.createElement('td');
-		var divIcono = document.createElement('div');
-		divIcono.id="downloadBackup";
-		divIcono.className = "downloadBackup";
-		//divIcono.onClick = function{
-			
-
-		//	};
-		tdIcono.appendChild(divIcono);
+		var form = document.createElement('a');
+		var d = new Date();
+		form.download = "SmartPanel"+d.getDate()+d.getMonth()+d.getFullYear()+"_"+d.getHours()+d.getMinutes()+".json";
+		form.href = "https://200.5.235.62:8443/dispositivos";
+		var buttonIcono = document.createElement('button');
+		buttonIcono.id="downloadBackup";
+		buttonIcono.className = "btnOpciones";
+		buttonIcono.className += " downloadBackup";
+		form.appendChild(buttonIcono);
+		//tdIcono.appendChild(divIcono);
+		tdIcono.appendChild(form);
 		tr.appendChild(td);
 		tr.appendChild(tdIcono);
 		opciones.appendChild(tr);
