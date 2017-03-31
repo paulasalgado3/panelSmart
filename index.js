@@ -106,6 +106,15 @@ function validarUsuario (u,p){
 	
 
 }
+function verificarExistencia(id){
+	var existencia = false;
+	for (i = 0; i < dispositivos.length; i++) {
+                if(dispositivos[i].id == id){
+                        existencia = true;
+                }
+            }
+	return existencia;
+}
 // _ para paginas
 // f_ para meotodos
 // sin nada para respuestas rest
@@ -151,10 +160,17 @@ app.get(/^(.+)$/, function(req, res){
 app.post(/^(.+)$/, function(req, res){ 
     switch(req.params[0]) {
         case '/dispositivos':
-            var dispositivonuevo = new Object();
-	    dispositivonuevo.id=req.body.id;
-	    dispositivonuevo.tipo=req.body.tipo;
-	    dispositivos.push(dispositivonuevo);
+           // var dispositivonuevo = new Object();
+	   // dispositivonuevo.id=req.body.id;
+	   // dispositivonuevo.tipo=req.body.tipo;
+	   // dispositivos.push(dispositivonuevo);
+	
+	      var pdispositivos = JSON.parse(JSON.stringify(req.body));
+	      pdispositivos.forEach( function (dispositivo){
+		if (!verificarExistencia(dispositivo.id)){
+			dispositivos.push(dispositivo);	
+			}
+		});
 	    res.end();
             break;
 	 case '/f_validarUsuario':
