@@ -112,6 +112,26 @@ function desplegarOpciones(){
 		var buttonIcono = document.createElement('button');
 		buttonIcono.className = "btnOpciones";
 		buttonIcono.className += " uploadBackup";
+		input.onchange = function(){ 
+			 var files = document.getElementById('selectFiles').files;
+  			  if (files.length <= 0) {
+    				return false;
+  			}
+			
+  			var fr = new FileReader();
+
+  			fr.onload = function(e) { 
+  			console.log(e.target.result);
+  			  var result = JSON.parse(e.target.result);
+    			  var formatted = JSON.stringify(result);
+			   console.log(formatted);
+        		   enviarPOST("https://200.5.235.62:8443/dispositivos",formatted);
+  }
+
+  fr.readAsText(files.item(0));
+
+
+		}; 
 		tdIcono.appendChild(input);
 		tdIcono.appendChild(buttonIcono);
 		tr.appendChild(td);

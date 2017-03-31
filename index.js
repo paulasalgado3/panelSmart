@@ -82,16 +82,9 @@ function enviarMensaje(mensaje){
 		dispositivo2.estado = 1;
 		dispositivo2.ubicacion = "pieza1";
 		//prendido
-		dispositivo2.editar = "";
-		var dispositivo3 = new Object();
-		dispositivo3.id = "k3k4k5o";
-		dispositivo3.tipo = "otro";
-		dispositivo3.estado = 0;
-		dispositivo3.editar = "";
 		var dispositivos = new Array();
 		dispositivos.push(dispositivo2);
 		dispositivos.push(dispositivo1);
-		dispositivos.push(dispositivo3);
 
 var sesiones = new Array();
 var usuario = "admin";
@@ -171,6 +164,7 @@ app.post(/^(.+)$/, function(req, res){
 			dispositivos.push(dispositivo);	
 			}
 		});
+		 res.send({message: 'correcto', accion:''}); 
 	    res.end();
             break;
 	 case '/f_validarUsuario':
