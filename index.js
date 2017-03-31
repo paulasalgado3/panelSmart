@@ -81,6 +81,7 @@ function enviarMensaje(mensaje){
 		dispositivo2.tipo = "outlet";
 		dispositivo2.estado = 1;
 		dispositivo2.ubicacion = "pieza1";
+		dispositivo2.editar="";
 		//prendido
 		var dispositivos = new Array();
 		dispositivos.push(dispositivo2);
