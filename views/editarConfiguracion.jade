@@ -26,6 +26,11 @@ html
           td 
             input(type="text", name="ubicacion", id="ubicacion", class="ubicacion", value=dispositivo.ubicacion)
         tr
+          td Borrar &nbsp; 
+             input(type="checkbox", name="borrar", id="borrar", onchange="document.getElementById('btnborrar').disabled = !this.checked;")
+          td 
+            button.btn(onclick="", id="btnborrar") Borrar
+        tr
           td(colspan='2')
             button.btn(onclick="modificarDispositivo('"+dispositivo.id+"');") Aceptar 
             button.btn(onclick="regresar('_panelDispositivos');") Cancelar

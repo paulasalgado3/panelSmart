@@ -223,4 +223,19 @@ app.put(/^(.+)$/, function(req, res){
 	}
 });
 
+app.delete(/^(.+)$/, function(req, res){
+    switch(req.params[0]) {
+        case '/dispositivos':
+            var dispositivonuevo = new Object();
+            for (i = 0; i < dispositivos.length; i++) {
+                if(dispositivos[i].id == req.body.id){
+			dispositivos.splice(i,1);
+                }
+            }
+            res.end();
+            break;
+        default:
+        }
+});
+
 console.log('Servidor corriendo');
