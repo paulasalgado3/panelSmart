@@ -26,10 +26,10 @@ html
           td 
             input(type="text", name="ubicacion", id="ubicacion", class="ubicacion", value=dispositivo.ubicacion)
         tr
-          td Borrar &nbsp; 
-             input(type="checkbox", name="borrar", id="borrar", onchange="document.getElementById('btnborrar').disabled = !this.checked;")
+          td Eliminar dispositivo &nbsp; 
+             input(type="checkbox", name="borrar", id="borrar", onchange="document.getElementById('btnborrar').disabled = !this.checked;if(this.checked == false){document.getElementById('btnborrar').className = 'false'}else{document.getElementById('btnborrar').className = 'btn'}")
           td 
-            button.btn(onclick="", id="btnborrar") Borrar
+            button.false(onclick="borrarDispositivo('"+dispositivo.id+"');", id="btnborrar", disabled=true) Borrar
         tr
           td(colspan='2')
             button.btn(onclick="modificarDispositivo('"+dispositivo.id+"');") Aceptar 

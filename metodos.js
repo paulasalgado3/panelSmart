@@ -47,6 +47,21 @@
 	window.location.href = '/_panelDispositivos';
       }        });
       }
+      function enviarDELETE(url,json){        $.ajax({
+      url: url,
+      type: 'DELETE',
+      dataType: 'json',
+      data: json,
+      contentType: 'application/json; charset=utf-8',
+      error: function (result) {
+      console.log(result);
+      },
+      success: function (data) {
+	window.location.href = '/_panelDispositivos';
+
+	      }        });
+      }
+
       function validarToken(){
       console.log('paso');
       var id = (document.cookie.match(/^(?:.*;)?token=([^;]+)(?:.*)?$/)||[,null])[1];
@@ -125,6 +140,10 @@ function desplegarOpciones(){
   			  var result = JSON.parse(e.target.result);
     			  var formatted = JSON.stringify(result);
 			   console.log(formatted);
+			   var getDispositivos;
+			   function devolver (disp){getDispositivos=disp;};
+			   httpGetAsync("https://200.5.235.62:8443/dispositivos", getDispositivos);
+			   enviarDELETE("https://200.5.235.62:8443/dispositivos",getDispositivos);
         		   enviarPOST("https://200.5.235.62:8443/dispositivos",formatted);
   }
 
@@ -162,4 +181,13 @@ function desplegarOpciones(){
  			 opciones.deleteRow(0);
 		}
 	}
+}
+function borrarDispositivo(id){
+	var dispositivo = new Object();
+	dispositivo.id = id;
+	var jdispositivo = JSON.stringify(dispositivo);
+	enviarDELETE("https://200.5.235.62:8443/dispositivos",jdispositivo);
+
+
+
 }

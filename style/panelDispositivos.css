@@ -156,15 +156,41 @@ input{
     border: none;
     cursor: pointer;
     position: relative;
-    margin-bottom: 20px;
     -webkit-animation: shadowFadeOut 0.4s;
 }
+
 .btn:hover {
       color: #fff;
       box-shadow: inset 0px 46px 0px 0px #1abc9c;
       -webkit-animation: shadowFade 0.4s;
       -moz-animation: shadowFade 0.4s;
       }
+
+.false{
+	background-color: #736e6b;
+	 margin: 5vw 1vw 5vw 1vw;
+	width: 40vw;
+	text-align: center;
+	font-size: 65px;
+	font-family: 'Open Sans',sans-serif;
+	font-weight: bold;
+	padding: 12px 0;
+	letter-spacing: 0;
+	box-shadow: inset 0px 0px 0px 0px #1abc9c;
+	color: #fff;
+	text-shadow: none;
+	text-transform: uppercase;
+	border: none;
+	cursor: pointer;
+	position: relative;
+	-webkit-animation: shadowFadeOut 0.4s;
+
+}
+.false:hover{
+      }
+
+
+}
 .btnOpciones:focus{
 	outline:none;
 }
