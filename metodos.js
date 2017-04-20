@@ -114,6 +114,77 @@ function regresar(path){
 function desplegarOpciones(){
 	var opciones = document.getElementById('opciones');
 	if(opciones.rows.length==0){
+		//cambiarPassword
+		var tr = document.createElement('tr');
+		var td = document.createElement('td');
+		td.innerHTML = "Cambiar Password";
+		td.className = "nombreOpciones";
+		var tdIcono = document.createElement('td');
+		var buttonIcono = document.createElement('button');
+		buttonIcono.className = "btnOpciones";
+		buttonIcono.className += " changePassword";
+		buttonIcono.onclick= function() {
+			var div = document.createElement('div');
+			div.className = "flotante";
+			div.id= "cambioPassword";
+			var table = document.createElement('table');
+			table.className = "opcionFlotante";
+			var tr = document.createElement('tr');
+			var td2 = document.createElement('td');
+			td2.colSpan = "2";
+			var input = document.createElement('input');
+			input.className = "inputChangePassword";
+			input.placeholder = "Contrase&ntilde;a Actual";
+			input.type = "password";
+			td2.appendChild(input);
+			tr.appendChild(td2);
+			table.appendChild(tr);
+		
+			var tr = document.createElement('tr');
+			var td2 = document.createElement('td');
+			td2.colSpan = "2";
+			var input = document.createElement('input');
+			input.className = "inputChangePassword";
+			input.placeholder = "Nueva Contrase&ntilde;a";
+			input.type = "password";
+			td2.appendChild(input);
+			tr.appendChild(td2);
+			table.appendChild(tr);
+
+			var tr = document.createElement('tr');
+			var td2 = document.createElement('td');
+			td2.colSpan = "2";
+			var input = document.createElement('input');
+			input.className = "inputChangePassword";
+			input.placeholder = "Repita su Nueva Contrase&ntilde;a";
+			input.type = "password";
+			td2.appendChild(input);
+			tr.appendChild(td2);
+			table.appendChild(tr);
+
+			var tr = document.createElement('tr');
+			var td1 = document.createElement('td');
+			var td2 = document.createElement('td');
+			var buttonAceptar = document.createElement('button');
+			buttonAceptar.className = "btn";
+			var buttonCancelar = document.createElement('button');
+			buttonCancelar.className = "btn";
+			buttonAceptar.innerHTML = "Aceptar";
+			buttonCancelar.innerHTML = "Cancelar";
+			td1.appendChild(buttonAceptar);
+			td2.appendChild(buttonCancelar);
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			table.appendChild(tr);
+		
+			div.appendChild(table);
+			document.body.appendChild(div);
+		};
+		tdIcono.appendChild(buttonIcono);
+		tr.appendChild(td);
+		tr.appendChild(tdIcono);
+		opciones.appendChild(tr);
+
 		//subirConfiguracion
 		var tr = document.createElement('tr');
 		var td = document.createElement('td');

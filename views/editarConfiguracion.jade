@@ -14,7 +14,7 @@ html
         tr
           td Tipo        
           td
-            select(id="tiposDispositivos", name="Tipos de Dispositivos", )
+            select(id="tiposDispositivos", name="Tipos de Dispositivos" )
               each tipo in tipos
                 if (dispositivo.tipo == tipo)
                   option(value=tipo selected="selected") #{tipo}

@@ -13,7 +13,7 @@ var app = express();
 var HTTPS_PORT = 8443;
 var httpsServer = https.createServer(serverConfig, app).listen(HTTPS_PORT);
 
- wss = new WebSocketServer({
+var  wss = new WebSocketServer({
 	server : httpsServer,
 });
 
@@ -29,7 +29,8 @@ wss.on('connection', function(wss){
 	//enviar algo
 	wss.send(JSON.stringify({tipo: '0', mensaje:'conectado'})); 
 	wss.on('message', function incoming(message){
-		 var mensaje = JSON.parse(message);
+		var mensaje = JSON.parse(message);
+		console.log(mensaje);
 		switch ((JSON.parse(message)).tipo){
 			case 'registro':
 				var dispositivonuevo = mensaje.mensaje; 

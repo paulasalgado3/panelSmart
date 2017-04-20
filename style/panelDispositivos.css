@@ -1,3 +1,38 @@
+.inputChangePassword{
+ 	margin-top: 5vw;
+      font-family: 'Open Sans', Calibri, Arial, sans-serif;
+      font-size: 75px;
+      font-weight: 400;
+      position: relative;
+      width: 85vw;
+      height: 15vw;
+      color: #676056;
+      border: none;
+      background: #f7f3eb;
+      color: #777;
+      transition: color 0.3s ease-out;
+      margin: 10px 0px 10px 0px;
+      text-indent:1vw;
+
+}
+.loginUser{
+		font-size: 75px;	
+	font-weight: 400;
+	margin-top: 5vw;
+	width: 65vw;
+	height: 15vw;
+	background: #f7f3eb;
+	text-indent:17vw;
+}
+.loginPassword{
+		font-size: 75px;	
+	font-weight: 400;
+	margin-top: 5vw;
+	width: 65vw;
+	height: 15vw;
+	background: #f7f3eb;
+	text-indent:17vw;
+}
 .outletApagado{ 
 	background-image: url("/imagenes/outletApagado.png"); 
 	height:20vw;
@@ -135,7 +170,7 @@ select{
 	font-size : 25;
 }
 input{
-	//text-transform: uppercase;
+
 	font-size : 25;
 }
 
@@ -341,20 +376,14 @@ input{
       text-indent:17vw;
       }
       .form input[type=text], input[type=password] {
-      margin-top: 5vw;
       font-family: 'Open Sans', Calibri, Arial, sans-serif;
-      font-size: 75px;
-      font-weight: 400;
       position: relative;
-      width: 65vw;
-      height: 15vw;
       color: #676056;
       border: none;
-      background: #f7f3eb;
       color: #777;
       transition: color 0.3s ease-out;
       margin: 10px 0px 10px 0px;
-      text-indent:17vw;
+
       }
       .form input[type=text] {
       margin-top:5vw;
@@ -566,6 +595,17 @@ form{
 	background-repeat: no-repeat;
 	margin-left:20px;
 }
+.changePassword{
+	height: 15vw;
+	width: 15vw;
+	border-radius: 50%;
+	background-color:#1b927a;
+	background-image: url("/imagenes/pass.png");
+	background-size: 50% 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-left:20px;
+}
 input[type=checkbox]
 {
   /* Double-sized Checkboxes */
@@ -574,5 +614,43 @@ input[type=checkbox]
   -webkit-transform: scale(4); /* Safari and Chrome */
   -o-transform: scale(4); /* Opera */
 
+}
+.flotante{
+	width:95vw;
+	height: 85vh;
+	z-index: 3;
+	position: fixed;
+	background-color:white;
+	top: 2vh;
+	left: 2vw;
+	font: 13px/20px "Open Sans", Tahoma, Verdana, sans-serif;
+	color: #a7a599;
+	text-transform: uppercase;
+	font-size : 25;
+}
+.opcionFlotante{
+	width:100%;
+	border-spacing: 0;
+	font: 13px/20px "Open Sans", Tahoma, Verdana, sans-serif;
+	text-transform: uppercase;
+	font-size : 45;
+}
+.opcionFlotante tr{
+	height:20vh;
+	widht: 80vw;
+}
+.opcionFlotante td{
+	margin: auto auto;
+	}
+.opcionFlotante td:first-child{
+	background-color:#1b927a;
+	color:white;
+	padding:2vw;
+}
+.opcionFlotante td:last-child{
+	padding:10px;	
+}
+.opcionFlotante tr:last-child{
+	background-color:#1b927a;
 }
 
